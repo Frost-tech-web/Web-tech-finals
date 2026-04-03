@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brew & Bean Coffee Shop</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* =====================
+       CSS Variables / Root
+    ===================== */
+    :root {
+      --brown: #6f4e37;
+      --light-brown: #c8a882;
+      --cream: #f5f0e8;
+      --dark: #2c1a0e;
+      --white: #ffffff;
+      --accent: #e07b39;
+    }
+
+    /* =====================
+       Reset & Base Styles
+    ===================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+    }
+
+    /* =====================
+       HEADER / NAV
+    ===================== */
+    header {
+      background-color: var(--brown);
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream);
+      font-size: 1.6rem;
+    }
+
+    /* Desktop nav links */
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--light-brown);
+    }
+
+    /* Hamburger button (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: var(--cream);
+      border-radius: 3px;
+    }
+
+    /* Mobile nav menu (hidden by default) */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background-color: var(--dark);
+      padding: 10px 30px 20px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--cream);
+      text-decoration: none;
+      padding: 10px 0;
+      font-weight: 700;
+      border-bottom: 1px solid #4a3020;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--light-brown);
+    }
+
+    /* =====================
+       HERO SECTION
+    ===================== */
+    #hero {
+      background: linear-gradient(rgba(44,26,14,0.65), rgba(44,26,14,0.65)),
+                  url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400') center/cover no-repeat;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    #hero h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream);
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+    }
+
+    #hero p {
+      color: var(--light-brown);
+      font-size: 1.15rem;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 14px 32px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: var(--brown);
+    }
+
+    /* =====================
+       ABOUT SECTION
+    ===================== */
+    #about {
+      padding: 70px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--brown);
+      margin-bottom: 15px;
+    }
+
+    #about p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #4a3020;
+    }
+
+    /* =====================
+       MENU SECTION
+    ===================== */
+    #menu {
+      background-color: var(--brown);
+      padding: 70px 30px;
+    }
+
+    #menu h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--cream);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--light-brown);
+      margin-bottom: 40px;
+      font-size: 1rem;
+    }
+
+    /* Tab buttons */
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 2px solid var(--light-brown);
+      color: var(--cream);
+      padding: 8px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    /* Tab content */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background-color: var(--cream);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .menu-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--brown);
+      margin-bottom: 5px;
+    }
+
+    .menu-card p {
+      font-size: 0.9rem;
+      color: #5a4030;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    /* =====================
+       IMAGE SLIDER
+    ===================== */
+    #gallery {
+      padding: 70px 30px;
+      background-color: var(--cream);
+      text-align: center;
+    }
+
+    #gallery h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+
+    .slider-wrapper {
+      position: relative;
+      max-width: 800px;
+      margin: 30px auto 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      min-width: 100%;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(111,78,55,0.75);
+      color: var(--white);
+      border: none;
+      font-size: 1.8rem;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .slider-btn:hover {
+      background: var(--accent);
+    }
+
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--light-brown);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: var(--brown);
+    }
+
+    /* =====================
+       CONTACT SECTION
+    ===================== */
+    #contact {
+      background-color: var(--dark);
+      padding: 70px 30px;
+    }
+
+    #contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--cream);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #contact .section-subtitle {
+      color: var(--light-brown);
+    }
+
+    .contact-form {
+      max-width: 580px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      color: var(--cream);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px 15px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      background: #3a2510;
+      color: var(--cream);
+      font-size: 0.95rem;
+      font-family: 'Lato', sans-serif;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      height: 130px;
+      resize: vertical;
+    }
+
+    /* Inline error messages */
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.82rem;
+      display: none;
+    }
+
+    .error-msg.show {
+      display: block;
+    }
+
+    .success-msg {
+      text-align: center;
+      color: #7ecb85;
+      font-size: 1rem;
+      font-weight: 700;
+      display: none;
+      padding: 10px;
+      background: rgba(126,203,133,0.12);
+      border-radius: 6px;
+    }
+
+    .success-msg.show {
+      display: block;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background-color: var(--brown);
+      color: var(--cream);
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--light-brown);
+      text-decoration: none;
+    }
+
+    /* =====================
+       RESPONSIVE (Mobile-First)
+    ===================== */
+
+    /* Mobile: hide desktop nav, show hamburger */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      #hero h1 {
+        font-size: 2.1rem;
+      }
+
+      #hero p {
+        font-size: 1rem;
+      }
+
+      .slides img {
+        height: 240px;
+      }
+
+      .tab-content.active {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tablet and up */
+    @media (min-width: 769px) {
+      .mobile-menu {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================
+       HEADER / NAV
+  ===================== -->
+  <header>
+    <nav aria-label="Main navigation">
+      <span class="logo">&#9749; Brew &amp; Bean</span>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile dropdown -->
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+      <a href="#hero" onclick="closeMobileMenu()">Home</a>
+      <a href="#about" onclick="closeMobileMenu()">About</a>
+      <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+      <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
+  </header>
+
+
+  <!-- =====================
+       MAIN CONTENT
+  ===================== -->
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" aria-label="Welcome section">
+      <h1>Your Daily Cup of Happiness</h1>
+      <p>Freshly brewed coffee, homemade pastries, and a cozy corner just for you.</p>
+      <a href="#menu" class="btn">See Our Menu</a>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" aria-label="About us">
+      <h2>About Us</h2>
+      <p>
+        Welcome to <strong>Brew &amp; Bean</strong> &mdash; a small neighborhood coffee shop opened in 2026
+        right here in the heart of the city. We believe that a great cup of coffee can turn any
+        ordinary morning into something special. Our beans are sourced from local roasters,
+        and every drink is made with care by our passionate baristas. Pull up a chair and stay a while!
+      </p>
+    </section>
+
+
+    <!-- MENU with TABS -->
+    <section id="menu" aria-label="Our menu">
+      <h2>Our Menu</h2>
+      <p class="section-subtitle">Browse by category</p>
+
+      <!-- Tab buttons -->
+      <div class="tab-buttons" role="tablist" aria-label="Menu categories">
+        <button class="tab-btn active" role="tab" aria-selected="true"  onclick="showTab('coffee', this)">Coffee</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" onclick="showTab('pastries', this)">Pastries</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" onclick="showTab('cold', this)">Cold Drinks</button>
+      </div>
+
+      <!-- Tab: Coffee -->
+      <div id="tab-coffee" class="tab-content active" role="tabpanel">
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400" alt="Espresso served in a small white cup" />
+          <h3>Espresso</h3>
+          <p>A rich, bold shot of pure coffee goodness.</p>
+          <span class="price">&#8369;60</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" alt="Creamy latte in a glass" />
+          <h3>Cafe Latte</h3>
+          <p>Smooth espresso with velvety steamed milk.</p>
+          <span class="price">&#8369;95</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400" alt="Cappuccino with foam art" />
+          <h3>Cappuccino</h3>
+          <p>Equal parts espresso, steamed milk, and foam.</p>
+          <span class="price">&#8369;90</span>
+        </div>
+      </div>
+
+      <!-- Tab: Pastries -->
+      <div id="tab-pastries" class="tab-content" role="tabpanel">
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400" alt="Golden croissant on a plate" />
+          <h3>Butter Croissant</h3>
+          <p>Flaky, golden, and buttery &mdash; baked fresh daily.</p>
+          <span class="price">&#8369;55</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400" alt="Chocolate muffin with chips" />
+          <h3>Chocolate Muffin</h3>
+          <p>Moist muffin loaded with chocolate chips.</p>
+          <span class="price">&#8369;65</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" alt="Sliced banana bread loaf" />
+          <h3>Banana Bread</h3>
+          <p>Classic comfort slice, slightly sweet and soft.</p>
+          <span class="price">&#8369;70</span>
+        </div>
+      </div>
+
+      <!-- Tab: Cold Drinks -->
+      <div id="tab-cold" class="tab-content" role="tabpanel">
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" alt="Iced coffee with ice cubes" />
+          <h3>Iced Americano</h3>
+          <p>Cold water, ice, and a double shot of espresso.</p>
+          <span class="price">&#8369;85</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400" alt="Matcha latte in a tall glass" />
+          <h3>Matcha Latte</h3>
+          <p>Earthy matcha blended with cold oat milk.</p>
+          <span class="price">&#8369;100</span>
+        </div>
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=400" alt="Fresh fruit lemonade" />
+          <h3>Lemonade</h3>
+          <p>Fresh-squeezed lemons with a hint of honey.</p>
+          <span class="price">&#8369;75</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- GALLERY / IMAGE SLIDER -->
+    <section id="gallery" aria-label="Photo gallery">
+      <h2>Our Cozy Corner</h2>
+      <p class="section-subtitle">A little peek inside</p>
+
+      <div class="slider-wrapper">
+        <div class="slides" id="slidesTrack">
+          <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800" alt="Cozy coffee shop interior with warm lighting" />
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800" alt="Coffee and laptop on a wooden table" />
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800" alt="Barista making coffee behind the counter" />
+          <img src="https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?w=800" alt="Cups of coffee arranged on a shelf" />
+        </div>
+        <button class="slider-btn" id="prevBtn" aria-label="Previous image">&#10094;</button>
+        <button class="slider-btn" id="nextBtn" aria-label="Next image">&#10095;</button>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="slider-dots" id="sliderDots" aria-label="Slide indicators"></div>
+    </section>
+
+
+    <!-- CONTACT FORM -->
+    <section id="contact" aria-label="Contact us">
+      <h2>Contact Us</h2>
+      <p class="section-subtitle">We&rsquo;d love to hear from you!</p>
+
+      <form class="contact-form" id="contactForm" novalidate>
+
+        <div class="form-group">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" placeholder="Your full name" autocomplete="name" />
+          <span class="error-msg" id="nameError">Please enter your name.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="emailInput">Email Address</label>
+          <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email" />
+          <span class="error-msg" id="emailError">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="messageInput">Message</label>
+          <textarea id="messageInput" placeholder="Write your message here..."></textarea>
+          <span class="error-msg" id="messageError">Please write a message (at least 10 characters).</span>
+        </div>
+
+        <button type="submit" class="btn">Send Message</button>
+
+        <div class="success-msg" id="successMsg" role="alert">
+          Message sent! We will reply soon. Thank you!
+        </div>
+
+      </form>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>19th Hyacinth South Patdu Compound South Green Heights Village Putatan Muntinlupa City &nbsp;|&nbsp; 0966-329-6301</p>
+    <p style="margin-top:8px;">
+      &copy; 2026 Brew &amp; Bean Coffee Shop. Made with love by
+      <a href="#">Group 6</a> &mdash; Web Technology Finals Project
+    </p>
+  </footer>
+
+
+  <!-- =====================
+       JAVASCRIPT
+  ===================== -->
+  <script>
+
+    // ==============================
+    // 1. MOBILE HAMBURGER MENU TOGGLE
+    // ==============================
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var mobileMenu   = document.getElementById('mobileMenu');
+
+    hamburgerBtn.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+
+    // ==============================
+    // 2. TABBED CONTENT (Menu)
+    // ==============================
+    function showTab(tabName, clickedBtn) {
+      // Hide all tab panels
+      var allTabs = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < allTabs.length; i++) {
+        allTabs[i].classList.remove('active');
+      }
+
+      // Remove active from all tab buttons
+      var allBtns = document.querySelectorAll('.tab-btn');
+      for (var j = 0; j < allBtns.length; j++) {
+        allBtns[j].classList.remove('active');
+        allBtns[j].setAttribute('aria-selected', 'false');
+      }
+
+      // Show selected tab panel
+      document.getElementById('tab-' + tabName).classList.add('active');
+
+      // Activate clicked button
+      clickedBtn.classList.add('active');
+      clickedBtn.setAttribute('aria-selected', 'true');
+    }
+
+
+    // ==============================
+    // 3. IMAGE SLIDER
+    // ==============================
+    var track        = document.getElementById('slidesTrack');
+    var slides       = track.querySelectorAll('img');
+    var dotsWrapper  = document.getElementById('sliderDots');
+    var currentSlide = 0;
+    var totalSlides  = slides.length;
+
+    // Build dots dynamically
+    for (var d = 0; d < totalSlides; d++) {
+      (function(index) {
+        var dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+        dot.addEventListener('click', function () {
+          goToSlide(index);
+        });
+        dotsWrapper.appendChild(dot);
+      })(d);
+    }
+
+    function updateDots() {
+      var dots = document.querySelectorAll('.dot');
+      for (var i = 0; i < dots.length; i++) {
+        if (i === currentSlide) {
+          dots[i].classList.add('active');
+        } else {
+          dots[i].classList.remove('active');
+        }
+      }
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+      updateDots();
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', function () {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      goToSlide(currentSlide);
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', function () {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    });
+
+    // Auto-advance slider every 4 seconds
+    setInterval(function () {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    }, 4000);
+
+
+    // ==============================
+    // 4. CONTACT FORM VALIDATION
+    // ==============================
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent page reload
+
+      var name    = document.getElementById('nameInput').value.trim();
+      var email   = document.getElementById('emailInput').value.trim();
+      var message = document.getElementById('messageInput').value.trim();
+
+      var hasError = false;
+
+      // Validate name
+      if (name === '') {
+        document.getElementById('nameError').classList.add('show');
+        hasError = true;
+      } else {
+        document.getElementById('nameError').classList.remove('show');
+      }
+
+      // Validate email (simple regex check)
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').classList.add('show');
+        hasError = true;
+      } else {
+        document.getElementById('emailError').classList.remove('show');
+      }
+
+      // Validate message (at least 10 characters)
+      if (message.length < 10) {
+        document.getElementById('messageError').classList.add('show');
+        hasError = true;
+      } else {
+        document.getElementById('messageError').classList.remove('show');
+      }
+
+      // If all valid, show success message
+      if (!hasError) {
+        document.getElementById('successMsg').classList.add('show');
+        document.getElementById('contactForm').reset();
+
+        // Hide success message after 5 seconds
+        setTimeout(function () {
+          document.getElementById('successMsg').classList.remove('show');
+        }, 5000);
+      }
+    });
+
+  </script>
+
+</body>
+</html>
